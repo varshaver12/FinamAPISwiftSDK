@@ -11,4 +11,12 @@ internal class ServicesBuilder {
         self.callOptions = CallOptions(customMetadata: headers)
     }
     
+    func makeOrdersService() -> OrdersService  {
+        let client = OrdersServiceClient(
+            channel: self.channel,
+            defaultCallOptions: self.callOptions
+        )
+        return GrpcOrdersService(client)
+    }
+    
 }
