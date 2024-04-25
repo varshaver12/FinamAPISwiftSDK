@@ -7,7 +7,7 @@ internal class ServicesBuilder {
     
     init(_ channel: GRPCChannel, token: String) {
         self.channel = channel
-        let headers = HPACKHeaders([("Authorization", "Bearer \(token)")])
+        let headers = HPACKHeaders([("X-Api-Key", "\(token)")])
         self.callOptions = CallOptions(customMetadata: headers)
     }
     
