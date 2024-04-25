@@ -5,19 +5,7 @@ import Foundation
 public final class CommonAsyncApiRequest<Result>: AsyncApiRequest<CommonApiClient, Result> {
  
     // MARK: Сервис работы с торговыми поручениями.
-    
-    /// Возвращает экземпляр `CommonAsyncApiRequest` для выставления биржевой заявки.
-    ///
-    /// - Parameters:
-    ///     - accountId: Идентификатор счёта пользователя.
-    ///     - instrumentId: Идентификатор инструмента (figi инструмента или uid инструмента).
-    ///     - orderRequestId: Идентификатор запроса выставления поручения для целей идемпотентности в формате uid (максимальная длина 36 символов).
-    ///     - type: Тип заявки.
-    ///     - direction: Направление операции.
-    ///     - price: Цена за 1 инструмент (игнорируется для рыночных поручений).
-    ///     - quantity: Количество лотов.
-    ///
-    /// - Returns: Экземпляр `CommonAsyncApiRequest`.
+
     public static func postOrder(
         clientID: String,
         securityBoard: String,
@@ -43,6 +31,16 @@ public final class CommonAsyncApiRequest<Result>: AsyncApiRequest<CommonApiClien
                                           validBefore: validBefore)
         }
     }
+    
+    // MARK: Сервис получения списка инструментов.
  
+    public static func getSecurities(
+        board: String?,
+        seccode: String?
+    ) -> CommonAsyncApiRequest<[Security]> {
+        .init {
+            try await $0.securities.getSecurities(board: board, seccode: seccode)
+        }
+    }
 }
 #endif

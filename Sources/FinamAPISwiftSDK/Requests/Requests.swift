@@ -63,3 +63,14 @@ internal extension Proto_Tradeapi_V1_NewOrderRequest {
                   validBefore: validBefore)
     }
 }
+
+internal extension Grpc_Tradeapi_V1_GetSecuritiesRequest {
+    init(board: String?, seccode: String?) throws {
+        if let board = board { self.board = Google_Protobuf_StringValue(stringLiteral: board) }
+        if let seccode = seccode { self.seccode = Google_Protobuf_StringValue(stringLiteral: seccode) }
+    }
+
+    static func new(board: String?, seccode: String?) throws -> Self {
+        try .init(board: board, seccode: seccode)
+    }
+}

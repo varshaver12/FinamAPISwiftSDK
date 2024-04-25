@@ -5,6 +5,9 @@ public protocol CommonApiClient {
     /// Сервис работы с торговыми поручениями.
     var orders: OrdersService { get }
     
+    /// Сервис предоставления справочной информации о ценных бумагах.
+    var securities: SecuritiesService { get }
+    
     func sendRequest<Result>(_ request: CommonApiRequest<Result>) throws -> EventLoopFuture<Result>
     
 #if compiler(>=5.5) && canImport(_Concurrency)
@@ -24,14 +27,16 @@ public extension CommonApiClient {
 internal final class CommonFinamApiClient: CommonApiClient {
     
     var orders: OrdersService
+    var securities: SecuritiesService
     
     private let connection: ApiConnection
 
     
-    init(_ target: ApiTarget, token: String) throws {
+    init(_ target: ApiTarget, token: String, appName: String) throws {
         self.connection = try ApiConnection(target: target)
-        let builder = ServicesBuilder(self.connection.channel, token: token)
+        let builder = ServicesBuilder(self.connection.channel, token: token, appName: appName)
         self.orders = builder.makeOrdersService()
+        self.securities = builder.makeSecuritiesService()
     }
     
     deinit {

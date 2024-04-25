@@ -5,9 +5,9 @@ internal class ServicesBuilder {
     private let channel: GRPCChannel
     private let callOptions: CallOptions
     
-    init(_ channel: GRPCChannel, token: String) {
+    init(_ channel: GRPCChannel, token: String, appName: String) {
         self.channel = channel
-        let headers = HPACKHeaders([("X-Api-Key", "\(token)")])
+        let headers = HPACKHeaders([("x-api-key", "\(token)"), ("x-app-name", appName)])
         self.callOptions = CallOptions(customMetadata: headers)
     }
     
@@ -17,6 +17,14 @@ internal class ServicesBuilder {
             defaultCallOptions: self.callOptions
         )
         return GrpcOrdersService(client)
+    }
+    
+    func makeSecuritiesService() -> SecuritiesService  {
+        let client = SecuritiesServiceClient(
+            channel: self.channel,
+            defaultCallOptions: self.callOptions
+        )
+        return GrpcSecuritiesService(client)
     }
     
 }
