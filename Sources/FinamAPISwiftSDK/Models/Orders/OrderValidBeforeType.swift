@@ -22,10 +22,22 @@ public enum OrderValidBeforeType: Int, Codable {
 }
 
 public struct OrderValidBefore {
-    
     /// Value is not specified. Do not use.
     /// Значение не указано. Не использовать.
     var type: OrderValidBeforeType
     var time: Date
 
+}
+
+internal extension OrderValidBefore {
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderValidBefore) throws {
+        self.type = try .new(rawValue: grpcModel.type.rawValue)
+        self.time = grpcModel.time.date
+    }
+}
+
+internal extension Proto_Tradeapi_V1_OrderValidBefore {
+    func toModel() throws -> OrderValidBefore {
+        try OrderValidBefore(grpcModel: self)
+    }
 }

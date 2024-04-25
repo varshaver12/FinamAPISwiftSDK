@@ -64,3 +64,17 @@ public enum OrderConditionType: Int, Codable {
     case lastDown // = 9
 
 }
+
+internal extension OrderCondition {
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderCondition) throws {
+        self.type = try .new(rawValue: grpcModel.type.rawValue)
+        self.price = grpcModel.price
+        self.time = grpcModel.time.date
+    }
+}
+
+internal extension Proto_Tradeapi_V1_OrderCondition {
+    func toModel() throws -> OrderCondition {
+        try OrderCondition(grpcModel: self)
+    }
+}
