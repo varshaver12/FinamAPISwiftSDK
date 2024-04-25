@@ -1,19 +1,11 @@
 import Foundation
 import SwiftProtobuf
+
 // MARK: - OrdersServiceRequests
 
 internal extension Proto_Tradeapi_V1_NewOrderRequest {
     init(
-        clientID: String,
-        securityBoard: String,
-        securityCode: String,
-        buySell: OrderDirection,
-        quantity: Int32,
-        useCredit: Bool,
-        price: Double?,
-        property: OrderProperty,
-        condition: OrderCondition?,
-        validBefore: OrderValidBefore?
+        clientID: String, securityBoard: String, securityCode: String, buySell: BuySell, quantity: Int32, useCredit: Bool, price: Double?, property: OrderProperty, condition: OrderCondition?, validBefore: OrderValidBefore?
     ) throws {
         self.clientID = clientID
         self.securityBoard = securityBoard
@@ -40,16 +32,7 @@ internal extension Proto_Tradeapi_V1_NewOrderRequest {
     }
 
     static func new(
-        clientID: String,
-        securityBoard: String,
-        securityCode: String,
-        buySell: OrderDirection,
-        quantity: Int32,
-        useCredit: Bool,
-        price: Double?,
-        property: OrderProperty,
-        condition: OrderCondition?,
-        validBefore: OrderValidBefore?
+        clientID: String, securityBoard: String, securityCode: String, buySell: BuySell, quantity: Int32, useCredit: Bool, price: Double?, property: OrderProperty, condition: OrderCondition?, validBefore: OrderValidBefore?
     ) throws -> Self {
         try .init(clientID: clientID,
                   securityBoard: securityBoard,
@@ -64,6 +47,35 @@ internal extension Proto_Tradeapi_V1_NewOrderRequest {
     }
 }
 
+internal extension Proto_Tradeapi_V1_CancelOrderRequest {
+    init(clientID: String, transactionID: Int32) throws {
+        self.clientID = clientID
+        self.transactionID = transactionID
+    }
+    static func new(clientID: String, transactionID: Int32) throws -> Self {
+        try .init(clientID: clientID,
+                  transactionID: transactionID)
+    }
+}
+
+internal extension Proto_Tradeapi_V1_GetOrdersRequest {
+    init(clientID: String, includeMatched: Bool, includeCanceled: Bool, includeActive: Bool) throws {
+        self.clientID = clientID
+        self.includeMatched = includeMatched
+        self.includeCanceled = includeCanceled
+        self.includeActive = includeActive
+    }
+    static func new(clientID: String, includeMatched: Bool, includeCanceled: Bool, includeActive: Bool) throws -> Self {
+        try .init(clientID: clientID,
+                  includeMatched: includeMatched,
+                  includeCanceled: includeCanceled,
+                  includeActive: includeActive
+        )
+    }
+}
+
+// MARK: - SecuritiesServiceRequests
+
 internal extension Grpc_Tradeapi_V1_GetSecuritiesRequest {
     init(board: String?, seccode: String?) throws {
         if let board = board { self.board = Google_Protobuf_StringValue(stringLiteral: board) }
@@ -74,3 +86,4 @@ internal extension Grpc_Tradeapi_V1_GetSecuritiesRequest {
         try .init(board: board, seccode: seccode)
     }
 }
+

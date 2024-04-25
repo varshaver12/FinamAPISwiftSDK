@@ -20,14 +20,14 @@ public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result>
         clientID: String,
         securityBoard: String,
         securityCode: String,
-        buySell: OrderDirection,
+        buySell: BuySell,
         quantity: Int32,
         useCredit: Bool,
         price: Double?,
         property: OrderProperty,
         condition: OrderCondition?,
         validBefore: OrderValidBefore?
-    ) -> CommonApiRequest<OrderInfo> {
+    ) -> CommonApiRequest<NewOrderResult> {
         .init {
             try $0.orders.postOrder(clientID: clientID,
                                     securityBoard: securityBoard,
@@ -39,6 +39,35 @@ public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result>
                                     property: property,
                                     condition: condition,
                                     validBefore: validBefore)
+        }
+    }
+    
+    public static func cancelOrder(clientID: String, transactionID: Int32) -> CommonApiRequest<CancelOrderResult> {
+        .init {
+            try $0.orders.cancelOrder(clientID: clientID, transactionID: transactionID)
+        }
+    }
+    
+    public static func getOrders(clientID: String,
+                                 includeMatched: Bool,
+                                 includeCanceled: Bool,
+                                 includeActive: Bool) -> CommonApiRequest<GetOrdersResult> {
+        .init {
+            try $0.orders.getOrders(clientID: clientID,
+                                    includeMatched: includeMatched,
+                                    includeCanceled: includeCanceled,
+                                    includeActive: includeActive)
+        }
+    }
+    
+    // MARK: Сервис получения списка инструментов.
+    
+    public static func getSecurities(
+        board: String?,
+        seccode: String?
+    ) -> CommonApiRequest<[Security]> {
+        .init {
+            try $0.securities.getSecurities(board: board, seccode: seccode)
         }
     }
 
