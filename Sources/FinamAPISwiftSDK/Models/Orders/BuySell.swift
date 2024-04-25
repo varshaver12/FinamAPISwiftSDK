@@ -1,5 +1,5 @@
 /// Направление операции.
-public enum OrderDirection: Int, Codable {
+public enum BuySell: Int, Codable {
     
     /// Value is not specified. Do not use.
     /// Значение не указано. Не использовать.
