@@ -44,22 +44,22 @@ public struct TakeProfit: Codable {
     var activationPrice: Double
     /// Correction.
     /// Коррекция.
-      var correctionPrice: StopPrice?
+    var correctionPrice: StopPrice?
     /// Spread price.
     /// Защитный спрэд.
-      var spreadPrice: StopPrice?
+    var spreadPrice: StopPrice?
     /// Market price.
     /// По рынку.
-      var marketPrice: Bool
+    var marketPrice: Bool
     /// Quantity.
     /// Количество.
-      var quantity: StopQuantity?
+    var quantity: StopQuantity?
     /// Time, seconds.
     /// Защитное время, сек.
-      var time: Int32
+    var time: Int32
     /// Use credit.
     /// Использовать кредит.
-      var useCredit: Bool
+    var useCredit: Bool
     
     public init(activationPrice: Double, correctionPrice: StopPrice?, spreadPrice: StopPrice?, marketPrice: Bool, quantity: StopQuantity?, time: Int32, useCredit: Bool) {
         self.activationPrice = activationPrice

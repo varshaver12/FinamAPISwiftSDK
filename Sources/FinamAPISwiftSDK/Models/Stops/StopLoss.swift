@@ -74,6 +74,7 @@ internal extension StopLoss {
     }
     
     func forRequest() throws -> Proto_Tradeapi_V1_StopLoss {
+        print("forRequest go")
         var grpcModel = Proto_Tradeapi_V1_StopLoss()
         grpcModel.activationPrice = activationPrice
         grpcModel.price = price
@@ -81,6 +82,7 @@ internal extension StopLoss {
         if let quantity = quantity { grpcModel.quantity = try quantity.forRequest() }
         grpcModel.time = time
         grpcModel.useCredit = useCredit
+        print("forRequest done")
         return grpcModel
     }
 }

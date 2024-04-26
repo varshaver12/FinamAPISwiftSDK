@@ -114,7 +114,15 @@ internal struct GrpcStopsService: StopsService {
             .toModel()
     }
     
-    func newStop(clientID: String, securityBoard: String, securityCode: String, buySell: BuySell, stopLoss: StopLoss?, takeProfit: TakeProfit?, expirationDate: Date?, linkOrder: Int64, validBefore: OrderValidBefore?) async throws -> NewStopResult {
+    func newStop(clientID: String,
+                 securityBoard: String,
+                 securityCode: String,
+                 buySell: BuySell,
+                 stopLoss: StopLoss?,
+                 takeProfit: TakeProfit?,
+                 expirationDate: Date?,
+                 linkOrder: Int64,
+                 validBefore: OrderValidBefore?) async throws -> NewStopResult {
         try await self.client
             .newStop( try .new(clientID: clientID,
                                 securityBoard: securityBoard,
