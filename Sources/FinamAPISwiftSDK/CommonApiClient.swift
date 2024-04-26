@@ -8,6 +8,9 @@ public protocol CommonApiClient {
     /// Сервис предоставления справочной информации о ценных бумагах.
     var securities: SecuritiesService { get }
     
+    /// Сервис работы со стоп-заявками.
+    var stops: StopsService { get }
+    
     func sendRequest<Result>(_ request: CommonApiRequest<Result>) throws -> EventLoopFuture<Result>
     
 #if compiler(>=5.5) && canImport(_Concurrency)
@@ -28,6 +31,7 @@ internal final class CommonFinamApiClient: CommonApiClient {
     
     var orders: OrdersService
     var securities: SecuritiesService
+    var stops: StopsService
     
     private let connection: ApiConnection
 
@@ -37,6 +41,7 @@ internal final class CommonFinamApiClient: CommonApiClient {
         let builder = ServicesBuilder(self.connection.channel, token: token, appName: appName)
         self.orders = builder.makeOrdersService()
         self.securities = builder.makeSecuritiesService()
+        self.stops = builder.makeStopsService()
     }
     
     deinit {
