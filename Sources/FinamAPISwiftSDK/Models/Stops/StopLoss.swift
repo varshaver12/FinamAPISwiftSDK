@@ -45,7 +45,7 @@ public struct StopLoss: Codable {
     var marketPrice: Bool
     /// Quantity.
     /// Количество.
-    var quantity: StopQuantity
+    var quantity: StopQuantity?
     /// Time, seconds.
     /// Защитное время, сек.
     var time: Int32
@@ -53,7 +53,7 @@ public struct StopLoss: Codable {
     /// Использовать кредит.
     var useCredit: Bool
     
-    public init(activationPrice: Double, price: Double, marketPrice: Bool, quantity: StopQuantity, time: Int32, useCredit: Bool) {
+    public init(activationPrice: Double, price: Double, marketPrice: Bool, quantity: StopQuantity?, time: Int32, useCredit: Bool) {
         self.activationPrice = activationPrice
         self.price = price
         self.marketPrice = marketPrice

@@ -12,7 +12,7 @@ public protocol NewOrderResult {
     
     /// Security Code.
     /// Тикер инструмента.
-    var securityCode: String? { get }
+    var securityCode: String { get }
 }
 
 internal struct NewOrderResultModel: NewOrderResult {
@@ -20,7 +20,7 @@ internal struct NewOrderResultModel: NewOrderResult {
     
     var transactionID: Int32
     
-    var securityCode: String?
+    var securityCode: String
   
 }
 

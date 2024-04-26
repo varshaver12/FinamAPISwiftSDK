@@ -60,7 +60,7 @@ public protocol OrderCondition {
 
   /// Placement time.
   /// Время выставления.
-    var time: Date { get }
+    var time: Date? { get }
  
 }
 
@@ -69,7 +69,7 @@ internal struct OrderConditionModel: OrderCondition {
     
     var price: Double
     
-    var time: Date
+    var time: Date?
     
     
 }

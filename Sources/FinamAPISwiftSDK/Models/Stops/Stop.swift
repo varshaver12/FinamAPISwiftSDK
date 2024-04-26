@@ -30,7 +30,7 @@ public protocol Stop {
 
     /// Expiration date for FORTS order.
     /// Дата экспирации заявки FORTS.
-    var expirationDate: Date { get }
+    var expirationDate: Date? { get }
 
     /// Linked order ID.
     /// Биржевой номер связанной (активной) заявки.
@@ -38,7 +38,7 @@ public protocol Stop {
 
     /// Order lifetime.
     /// Время действия заявки.
-    var validBefore: OrderValidBefore { get }
+    var validBefore: OrderValidBefore? { get }
 
     /// Order status.
     /// Состояние заявки.
@@ -58,11 +58,11 @@ public protocol Stop {
 
     /// Time of order registration on the server in UTC.
     /// Время, когда заявка была зарегистрирована на сервере. В UTC.
-    var acceptedAt: Date { get }
+    var acceptedAt: Date? { get }
 
     /// Time of order canceled on the server in UTC.
     /// Время, когда заявка была отменена на сервере. В UTC.
-    var canceledAt: Date { get }
+    var canceledAt: Date? { get }
 
     /// Price currency.
     /// Валюта цены.
@@ -78,11 +78,11 @@ public protocol Stop {
 
     /// Stop loss.
     /// Стоп лосс.
-    var stopLoss: StopLoss { get }
+    var stopLoss: StopLoss? { get }
 
     /// Take profit.
     /// Тейк профит.
-    var takeProfit: TakeProfit { get }
+    var takeProfit: TakeProfit? { get }
 
 }
 
@@ -93,20 +93,20 @@ internal struct StopModel: Stop {
     var market: Market
     var clientID: String
     var buySell: BuySell
-    var expirationDate: Date
+    var expirationDate: Date?
     var linkOrder: Int64
-    var validBefore: OrderValidBefore
+    var validBefore: OrderValidBefore?
     var status: StopStatus
     var message: String
     var orderNo: Int64
     var tradeNo: Int64
-    var acceptedAt: Date
-    var canceledAt: Date
+    var acceptedAt: Date?
+    var canceledAt: Date?
     var currency: String
     var takeProfitExtremum: Double
     var takeProfitLevel: Double
-    var stopLoss: StopLoss
-    var takeProfit: TakeProfit
+    var stopLoss: StopLoss?
+    var takeProfit: TakeProfit?
 }
 
 internal extension StopModel {
