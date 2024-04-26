@@ -1,4 +1,4 @@
-[submodule "trade-api-docs"]
-    path = trade-api-docs
-    url = https://github.com/FinamWeb/trade-api-docs.git
+[submodule "TradeApiDocs"]
+    path = TradeApiDocs
+    url = https://github.com/FinamWeb/trade-api-docs
 
