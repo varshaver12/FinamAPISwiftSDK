@@ -57,6 +57,27 @@ public final class CommonAsyncApiRequest<Result>: AsyncApiRequest<CommonApiClien
         }
     }
     
+    public static func cancelStop(clientID: String, stopID: Int32) -> CommonAsyncApiRequest<CancelStopResult> {
+        .init {
+            try await $0.stops.cancelStop(clientID: clientID,
+                                          stopID: stopID)
+        }
+    }
+    
+    public static func newStop(clientID: String, securityBoard: String, securityCode: String, buySell: BuySell, stopLoss: StopLoss?, takeProfit: TakeProfit?, expirationDate: Date?, linkOrder: Int64, validBefore: OrderValidBefore?) -> CommonAsyncApiRequest<NewStopResult> {
+        .init {
+            try await $0.stops.newStop(clientID: clientID,
+                                        securityBoard: securityBoard,
+                                        securityCode: securityCode,
+                                        buySell: buySell,
+                                        stopLoss: stopLoss,
+                                        takeProfit: takeProfit,
+                                        expirationDate: expirationDate,
+                                        linkOrder: linkOrder,
+                                        validBefore: validBefore)
+        }
+    }
+    
     
 }
 #endif

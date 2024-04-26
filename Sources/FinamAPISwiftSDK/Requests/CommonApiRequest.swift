@@ -71,5 +71,26 @@ public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result>
         }
     }
     
+    public static func cancelStop(clientID: String, stopID: Int32) -> CommonApiRequest<CancelStopResult> {
+        .init {
+            try $0.stops.cancelStop(clientID: clientID,
+                                    stopID: stopID)
+        }
+    }
+    
+    public static func newStop(clientID: String, securityBoard: String, securityCode: String, buySell: BuySell, stopLoss: StopLoss?, takeProfit: TakeProfit?, expirationDate: Date?, linkOrder: Int64, validBefore: OrderValidBefore?) -> CommonApiRequest<NewStopResult> {
+        .init {
+            try $0.stops.newStop(clientID: clientID,
+                                 securityBoard: securityBoard,
+                                 securityCode: securityCode,
+                                 buySell: buySell,
+                                 stopLoss: stopLoss,
+                                 takeProfit: takeProfit,
+                                 expirationDate: expirationDate,
+                                 linkOrder: linkOrder,
+                                 validBefore: validBefore)
+        }
+    }
+    
     
 }

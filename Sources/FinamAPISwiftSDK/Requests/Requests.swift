@@ -104,3 +104,57 @@ internal extension Proto_Tradeapi_V1_GetStopsRequest {
                   includeActive: includeActive)
     }
 }
+
+internal extension Proto_Tradeapi_V1_CancelStopRequest {
+    init(clientID: String, stopID: Int32) throws {
+        self.clientID = clientID
+        self.stopID = stopID
+    }
+    
+    static func new(clientID: String, stopID: Int32) throws -> Self {
+        try .init(clientID: clientID,
+                  stopID: stopID)
+    }
+}
+
+internal extension Proto_Tradeapi_V1_NewStopRequest {
+    init(clientID: String,
+         securityBoard: String,
+         securityCode: String,
+         buySell: BuySell,
+         stopLoss: StopLoss?,
+         takeProfit: TakeProfit?,
+         expirationDate: Date?,
+         linkOrder: Int64,
+         validBefore: OrderValidBefore?) throws {
+        self.clientID = clientID
+        self.securityBoard = securityBoard
+        self.securityCode = securityCode
+        self.buySell = try .new(rawValue: buySell.rawValue)
+        if let stopLoss = stopLoss { self.stopLoss = try stopLoss.forRequest() }
+        if let takeProfit = takeProfit { self.takeProfit = try takeProfit.forRequest() }
+        if let date = expirationDate { self.expirationDate = SwiftProtobuf.Google_Protobuf_Timestamp(date: date) }
+        self.linkOrder = linkOrder
+        if let validBefore = validBefore { self.validBefore = try validBefore.forRequest() }
+    }
+    
+    static func new(clientID: String,
+                    securityBoard: String,
+                    securityCode: String,
+                    buySell: BuySell,
+                    stopLoss: StopLoss?,
+                    takeProfit: TakeProfit?,
+                    expirationDate: Date?,
+                    linkOrder: Int64,
+                    validBefore: OrderValidBefore?) throws -> Self {
+        try .init(clientID: clientID,
+                  securityBoard: securityBoard,
+                  securityCode: securityCode,
+                  buySell: buySell,
+                  stopLoss: stopLoss,
+                  takeProfit: takeProfit,
+                  expirationDate: expirationDate,
+                  linkOrder: linkOrder,
+                  validBefore: validBefore)
+    }
+}
