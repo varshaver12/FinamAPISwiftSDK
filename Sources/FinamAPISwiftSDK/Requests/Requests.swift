@@ -1,6 +1,19 @@
 import Foundation
 import SwiftProtobuf
 
+// MARK: - SecuritiesServiceRequests
+
+internal extension Grpc_Tradeapi_V1_GetSecuritiesRequest {
+    init(board: String?, seccode: String?) throws {
+        if let board = board { self.board = Google_Protobuf_StringValue(stringLiteral: board) }
+        if let seccode = seccode { self.seccode = Google_Protobuf_StringValue(stringLiteral: seccode) }
+    }
+    
+    static func new(board: String?, seccode: String?) throws -> Self {
+        try .init(board: board, seccode: seccode)
+    }
+}
+
 // MARK: - OrdersServiceRequests
 
 internal extension Proto_Tradeapi_V1_NewOrderRequest {
@@ -22,15 +35,15 @@ internal extension Proto_Tradeapi_V1_NewOrderRequest {
             protoOrderCondition.time = SwiftProtobuf.Google_Protobuf_Timestamp(date: condition.time)
             self.condition = protoOrderCondition
         }
-        if let validBefore = validBefore { 
+        if let validBefore = validBefore {
             var protoValidBefore = Proto_Tradeapi_V1_OrderValidBefore()
             protoValidBefore.type = try .new(rawValue: validBefore.type.rawValue)
             protoValidBefore.time = SwiftProtobuf.Google_Protobuf_Timestamp(date: validBefore.time)
             self.validBefore = protoValidBefore
         }
-
+        
     }
-
+    
     static func new(
         clientID: String, securityBoard: String, securityCode: String, buySell: BuySell, quantity: Int32, useCredit: Bool, price: Double?, property: OrderProperty, condition: OrderCondition?, validBefore: OrderValidBefore?
     ) throws -> Self {
@@ -74,16 +87,20 @@ internal extension Proto_Tradeapi_V1_GetOrdersRequest {
     }
 }
 
-// MARK: - SecuritiesServiceRequests
+// MARK: - StopsServiceRequests
 
-internal extension Grpc_Tradeapi_V1_GetSecuritiesRequest {
-    init(board: String?, seccode: String?) throws {
-        if let board = board { self.board = Google_Protobuf_StringValue(stringLiteral: board) }
-        if let seccode = seccode { self.seccode = Google_Protobuf_StringValue(stringLiteral: seccode) }
+internal extension Proto_Tradeapi_V1_GetStopsRequest {
+    init(clientID: String, includeExecuted: Bool, includeCanceled: Bool, includeActive: Bool) throws {
+        self.clientID = clientID
+        self.includeExecuted = includeExecuted
+        self.includeCanceled = includeCanceled
+        self.includeActive = includeActive
     }
-
-    static func new(board: String?, seccode: String?) throws -> Self {
-        try .init(board: board, seccode: seccode)
+    
+    static func new(clientID: String, includeExecuted: Bool, includeCanceled: Bool, includeActive: Bool) throws -> Self {
+        try .init(clientID: clientID,
+                  includeExecuted: includeExecuted,
+                  includeCanceled: includeCanceled,
+                  includeActive: includeActive)
     }
 }
-
