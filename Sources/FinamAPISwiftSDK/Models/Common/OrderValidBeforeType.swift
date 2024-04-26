@@ -30,6 +30,11 @@ public enum OrderValidBeforeType: Int, Codable {
 public struct OrderValidBefore: Codable {
     var type: OrderValidBeforeType
     var time: Date?
+    
+    init(type: OrderValidBeforeType, time: Date? = nil) {
+        self.type = type
+        self.time = time
+    }
 }
 
 internal extension OrderValidBefore {
