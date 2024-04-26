@@ -18,28 +18,33 @@ public enum StopQuantityUnits: Int, Codable  {
 
 /// Stop quantity.
 /// Объем стоп-заявки.
-public protocol StopQuantity {
+public struct StopQuantity: Codable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// Value.
   /// Значение объема.
-    var value: Double { get }
+    var value: Double
 
   /// Units.
   /// Единицы объема.
-    var units: StopQuantityUnits { get }
-
-}
-
-
-internal struct StopQuantityModel: StopQuantity {
-    var value: Double
     var units: StopQuantityUnits
+    
+    public init(value: Double, units: StopQuantityUnits) {
+        self.value = value
+        self.units = units
+    }
+
 }
 
-internal extension StopQuantityModel {
+
+//internal struct StopQuantityModel: StopQuantity {
+//    var value: Double
+//    var units: StopQuantityUnits
+//}
+
+internal extension StopQuantity {
     fileprivate init(grpcModel: Proto_Tradeapi_V1_StopQuantity) throws {
         self.value = grpcModel.value
         self.units = try .new(rawValue: grpcModel.units.rawValue)
@@ -47,7 +52,7 @@ internal extension StopQuantityModel {
 }
 
 internal extension Proto_Tradeapi_V1_StopQuantity {
-    func toModel() throws -> StopQuantityModel {
-        try StopQuantityModel(grpcModel: self)
+    func toModel() throws -> StopQuantity {
+        try StopQuantity(grpcModel: self)
     }
 }

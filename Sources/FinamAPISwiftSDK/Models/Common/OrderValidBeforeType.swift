@@ -21,26 +21,32 @@ public enum OrderValidBeforeType: Int, Codable {
 
 }
 
-public protocol OrderValidBefore {
-    var type: OrderValidBeforeType { get }
-    var time: Date { get }
+//public protocol OrderValidBefore {
+//    var type: OrderValidBeforeType { get }
+//    var time: Date { get }
+//
+//}
 
-}
-
-internal struct OrderValidBeforeModel: OrderValidBefore {
+public struct OrderValidBefore: Codable {
     var type: OrderValidBeforeType
     var time: Date
 }
 
-internal extension OrderValidBeforeModel {
+internal extension OrderValidBefore {
     fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderValidBefore) throws {
         self.type = try .new(rawValue: grpcModel.type.rawValue)
         self.time = grpcModel.time.date
     }
+    
+    func forRequest() throws -> Proto_Tradeapi_V1_OrderValidBefore {
+        try Proto_Tradeapi_V1_OrderValidBefore(
+            jsonUTF8Data: JSONEncoder().encode(self)
+        )
+    }
 }
 
 internal extension Proto_Tradeapi_V1_OrderValidBefore {
-    func toModel() throws -> OrderValidBeforeModel {
-        try OrderValidBeforeModel(grpcModel: self)
+    func toModel() throws -> OrderValidBefore {
+        try OrderValidBefore(grpcModel: self)
     }
 }

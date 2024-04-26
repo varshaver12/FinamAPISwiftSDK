@@ -17,27 +17,37 @@ public enum StopPriceUnits: Int, Codable {
 
 /// Stop price.
 /// Цена стоп-заявки.
-public protocol StopPrice {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-    
+//public protocol StopPrice {
+//    // SwiftProtobuf.Message conformance is added in an extension below. See the
+//    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+//    // methods supported on all messages.
+//    
+//    /// Value.
+//    /// Значение цены.
+//    var value: Double { get }
+//    
+//    /// Units.
+//    /// Единицы цены.
+//    var units: StopPriceUnits { get }
+//    
+//}
+/// Stop price.
+/// Цена стоп-заявки.
+public struct StopPrice: Codable {
     /// Value.
     /// Значение цены.
-    var value: Double { get }
-    
+    var value: Double
     /// Units.
     /// Единицы цены.
-    var units: StopPriceUnits { get }
-    
-}
-
-internal struct StopPriceModel: StopPrice {
-    var value: Double
     var units: StopPriceUnits
+    
+    public init(value: Double, units: StopPriceUnits) {
+        self.value = value
+        self.units = units
+    }
 }
 
-internal extension StopPriceModel {
+internal extension StopPrice {
     fileprivate init(grpcModel: Proto_Tradeapi_V1_StopPrice) throws {
         self.value = grpcModel.value
         self.units = try .new(rawValue: grpcModel.units.rawValue)
@@ -45,7 +55,7 @@ internal extension StopPriceModel {
 }
 
 internal extension Proto_Tradeapi_V1_StopPrice {
-    func toModel() throws -> StopPriceModel {
-        try StopPriceModel(grpcModel: self)
+    func toModel() throws -> StopPrice {
+        try StopPrice(grpcModel: self)
     }
 }
