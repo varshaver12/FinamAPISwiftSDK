@@ -49,6 +49,14 @@ internal extension StopQuantity {
         self.value = grpcModel.value
         self.units = try .new(rawValue: grpcModel.units.rawValue)
     }
+    
+    func forRequest() throws -> Proto_Tradeapi_V1_StopQuantity {
+        var grpcModel = Proto_Tradeapi_V1_StopQuantity()
+        grpcModel.value = value
+        grpcModel.units = try .new(rawValue: units.rawValue)
+
+        return grpcModel
+    }
 }
 
 internal extension Proto_Tradeapi_V1_StopQuantity {

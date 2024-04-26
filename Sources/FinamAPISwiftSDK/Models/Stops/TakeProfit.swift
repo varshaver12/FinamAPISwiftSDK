@@ -84,9 +84,16 @@ internal extension TakeProfit {
     }
     
     func forRequest() throws -> Proto_Tradeapi_V1_TakeProfit {
-        try Proto_Tradeapi_V1_TakeProfit(
-            jsonUTF8Data: JSONEncoder().encode(self)
-        )
+        var grpcModel = Proto_Tradeapi_V1_TakeProfit()
+        grpcModel.activationPrice = activationPrice
+        if let price = correctionPrice { grpcModel.correctionPrice = try price.forRequest() }
+        if let price = spreadPrice { grpcModel.spreadPrice = try price.forRequest() }
+        grpcModel.marketPrice = marketPrice
+        if let quantity = quantity { grpcModel.quantity = try quantity.forRequest() }
+        grpcModel.time = time
+        grpcModel.useCredit = useCredit
+        
+        return grpcModel
     }
 }
 

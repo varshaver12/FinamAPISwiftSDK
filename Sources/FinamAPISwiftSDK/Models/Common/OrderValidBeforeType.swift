@@ -1,4 +1,5 @@
 import Foundation
+import SwiftProtobuf
 
 /// Условие заявки.
 public enum OrderValidBeforeType: Int, Codable {
@@ -31,7 +32,7 @@ public struct OrderValidBefore: Codable {
     var type: OrderValidBeforeType
     var time: Date?
     
-    init(type: OrderValidBeforeType, time: Date? = nil) {
+    public init(type: OrderValidBeforeType, time: Date?) {
         self.type = type
         self.time = time
     }
@@ -44,9 +45,10 @@ internal extension OrderValidBefore {
     }
     
     func forRequest() throws -> Proto_Tradeapi_V1_OrderValidBefore {
-        try Proto_Tradeapi_V1_OrderValidBefore(
-            jsonUTF8Data: JSONEncoder().encode(self)
-        )
+        var grpcModel = Proto_Tradeapi_V1_OrderValidBefore()
+        grpcModel.type = try .new(rawValue: type.rawValue)
+        if let time = time { grpcModel.time = SwiftProtobuf.Google_Protobuf_Timestamp(date: time) }
+        return grpcModel
     }
 }
 

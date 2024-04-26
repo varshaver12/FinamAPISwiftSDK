@@ -32,13 +32,13 @@ internal extension Proto_Tradeapi_V1_NewOrderRequest {
             var protoOrderCondition = Proto_Tradeapi_V1_OrderCondition()
             protoOrderCondition.price = condition.price
             protoOrderCondition.type = try .new(rawValue: condition.type.rawValue)
-            protoOrderCondition.time = SwiftProtobuf.Google_Protobuf_Timestamp(date: condition.time)
+            if let time = condition.time { protoOrderCondition.time = SwiftProtobuf.Google_Protobuf_Timestamp(date: time) }
             self.condition = protoOrderCondition
         }
         if let validBefore = validBefore {
             var protoValidBefore = Proto_Tradeapi_V1_OrderValidBefore()
             protoValidBefore.type = try .new(rawValue: validBefore.type.rawValue)
-            protoValidBefore.time = SwiftProtobuf.Google_Protobuf_Timestamp(date: validBefore.time)
+            if let time = validBefore.time { protoValidBefore.time = SwiftProtobuf.Google_Protobuf_Timestamp(date: time) }
             self.validBefore = protoValidBefore
         }
         
