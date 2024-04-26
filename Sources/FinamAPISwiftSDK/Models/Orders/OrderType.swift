@@ -9,4 +9,5 @@ public enum OrderType: Int, Codable {
     
     /// Условная.
     case bestPrice
+    
 }
