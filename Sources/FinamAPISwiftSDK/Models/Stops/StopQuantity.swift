@@ -15,7 +15,6 @@ public enum StopQuantityUnits: Int, Codable  {
   case lots // = 2
 
 }
-
 /// Stop quantity.
 /// Объем стоп-заявки.
 public struct StopQuantity: Codable {
@@ -37,12 +36,6 @@ public struct StopQuantity: Codable {
     }
 
 }
-
-
-//internal struct StopQuantityModel: StopQuantity {
-//    var value: Double
-//    var units: StopQuantityUnits
-//}
 
 internal extension StopQuantity {
     fileprivate init(grpcModel: Proto_Tradeapi_V1_StopQuantity) throws {

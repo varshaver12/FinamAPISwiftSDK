@@ -1,41 +1,4 @@
 import Foundation
-//
-///// TakeProfit order.
-///// Тейк профит заявка.
-//public protocol TakeProfit {
-//  // SwiftProtobuf.Message conformance is added in an extension below. See the
-//  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-//  // methods supported on all messages.
-//
-//  /// Activation price.
-//  /// Цена активации.
-//  var activationPrice: Double { get }
-//
-//  /// Correction.
-//  /// Коррекция.
-//    var correctionPrice: StopPrice { get }
-//
-//  /// Spread price.
-//  /// Защитный спрэд.
-//    var spreadPrice: StopPrice { get }
-//
-//  /// Market price.
-//  /// По рынку.
-//    var marketPrice: Bool { get }
-//
-//  /// Quantity.
-//  /// Количество.
-//    var quantity: StopQuantity { get }
-//
-//  /// Time, seconds.
-//  /// Защитное время, сек.
-//    var time: Int32 { get }
-//
-//  /// Use credit.
-//  /// Использовать кредит.
-//    var useCredit: Bool { get }
-//
-//}
 /// TakeProfit order.
 /// Тейк профит заявка.
 public struct TakeProfit: Codable {

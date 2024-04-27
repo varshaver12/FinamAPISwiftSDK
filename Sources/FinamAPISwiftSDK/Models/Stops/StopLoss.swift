@@ -1,36 +1,4 @@
 import Foundation
-///// StopLoss order.
-///// Стоп лосс заявка.
-//public protocol StopLoss: Codable {
-//  // SwiftProtobuf.Message conformance is added in an extension below. See the
-//  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-//  // methods supported on all messages.
-//
-//  /// Activation price.
-//  /// Цена активации.
-//  var activationPrice: Double { get }
-//
-//  /// Price.
-//  /// Цена заявки.
-//    var price: Double { get }
-//
-//  /// Market price.
-//  /// По рынку.
-//    var marketPrice: Bool { get }
-//
-//  /// Quantity.
-//  /// Количество.
-//    var quantity: StopQuantity { get }
-//
-//  /// Time, seconds.
-//  /// Защитное время, сек.
-//    var time: Int32 { get }
-//
-//  /// Use credit.
-//  /// Использовать кредит.
-//    var useCredit: Bool { get }
-//
-//}
 /// StopLoss order.
 /// Стоп лосс заявка.
 public struct StopLoss: Codable {
@@ -74,7 +42,6 @@ internal extension StopLoss {
     }
     
     func forRequest() throws -> Proto_Tradeapi_V1_StopLoss {
-        print("forRequest go")
         var grpcModel = Proto_Tradeapi_V1_StopLoss()
         grpcModel.activationPrice = activationPrice
         grpcModel.price = price
@@ -82,7 +49,7 @@ internal extension StopLoss {
         if let quantity = quantity { grpcModel.quantity = try quantity.forRequest() }
         grpcModel.time = time
         grpcModel.useCredit = useCredit
-        print("forRequest done")
+        
         return grpcModel
     }
 }

@@ -14,23 +14,6 @@ public enum StopPriceUnits: Int, Codable {
     case pips // = 2
     
 }
-
-/// Stop price.
-/// Цена стоп-заявки.
-//public protocol StopPrice {
-//    // SwiftProtobuf.Message conformance is added in an extension below. See the
-//    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-//    // methods supported on all messages.
-//    
-//    /// Value.
-//    /// Значение цены.
-//    var value: Double { get }
-//    
-//    /// Units.
-//    /// Единицы цены.
-//    var units: StopPriceUnits { get }
-//    
-//}
 /// Stop price.
 /// Цена стоп-заявки.
 public struct StopPrice: Codable {

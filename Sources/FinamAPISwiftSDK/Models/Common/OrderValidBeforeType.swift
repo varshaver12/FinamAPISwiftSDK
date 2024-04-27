@@ -22,12 +22,6 @@ public enum OrderValidBeforeType: Int, Codable {
 
 }
 
-//public protocol OrderValidBefore {
-//    var type: OrderValidBeforeType { get }
-//    var time: Date { get }
-//
-//}
-
 public struct OrderValidBefore: Codable {
     var type: OrderValidBeforeType
     var time: Date?

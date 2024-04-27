@@ -127,7 +127,6 @@ internal extension Proto_Tradeapi_V1_NewStopRequest {
          expirationDate: Date?,
          linkOrder: Int64,
          validBefore: OrderValidBefore?) throws {
-        print("Proto_Tradeapi_V1_NewStopRequest go")
         self.clientID = clientID
         self.securityBoard = securityBoard
         self.securityCode = securityCode
@@ -137,7 +136,6 @@ internal extension Proto_Tradeapi_V1_NewStopRequest {
         if let date = expirationDate { self.expirationDate = SwiftProtobuf.Google_Protobuf_Timestamp(date: date) }
         self.linkOrder = linkOrder
         if let validBefore = validBefore { self.validBefore = try validBefore.forRequest() }
-        print("Proto_Tradeapi_V1_NewStopRequest done")
     }
     
     static func new(clientID: String,
