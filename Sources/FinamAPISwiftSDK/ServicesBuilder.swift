@@ -27,4 +27,12 @@ internal class ServicesBuilder {
         return GrpcSecuritiesService(client)
     }
     
+    func makeStopsService() -> StopsService  {
+        let client = StopsServiceClient(
+            channel: self.channel,
+            defaultCallOptions: self.callOptions
+        )
+        return GrpcStopsService(client)
+    }
+    
 }

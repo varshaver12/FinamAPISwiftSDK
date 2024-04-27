@@ -1,8 +1,8 @@
 import Foundation
 
 public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result> {
-
-    // MARK: Сервис работы с торговыми поручениями.
+    
+    // MARK: - Сервис работы с торговыми поручениями.
     
     /// Возвращает экземпляр `CommonApiRequest` для выставления биржевой заявки.
     ///
@@ -16,18 +16,7 @@ public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result>
     ///     - quantity: Количество лотов.
     ///
     /// - Returns: Экземпляр `CommonApiRequest`.
-    public static func postOrder(
-        clientID: String,
-        securityBoard: String,
-        securityCode: String,
-        buySell: BuySell,
-        quantity: Int32,
-        useCredit: Bool,
-        price: Double?,
-        property: OrderProperty,
-        condition: OrderCondition?,
-        validBefore: OrderValidBefore?
-    ) -> CommonApiRequest<NewOrderResult> {
+    public static func postOrder(clientID: String, securityBoard: String, securityCode: String, buySell: BuySell, quantity: Int32, useCredit: Bool, price: Double?, property: OrderProperty, condition: OrderCondition?, validBefore: OrderValidBefore?) -> CommonApiRequest<NewOrderResult> {
         .init {
             try $0.orders.postOrder(clientID: clientID,
                                     securityBoard: securityBoard,
@@ -60,7 +49,7 @@ public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result>
         }
     }
     
-    // MARK: Сервис получения списка инструментов.
+    // MARK: - Сервис получения списка инструментов.
     
     public static func getSecurities(
         board: String?,
@@ -70,5 +59,38 @@ public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result>
             try $0.securities.getSecurities(board: board, seccode: seccode)
         }
     }
-
+    
+    // MARK: - Сервис получения списка инструментов.
+    
+    public static func getStops(clientID: String, includeExecuted: Bool, includeCanceled: Bool, includeActive: Bool) -> CommonApiRequest<GetStopsResult> {
+        .init {
+            try $0.stops.getStops(clientID: clientID,
+                                  includeExecuted: includeExecuted,
+                                  includeCanceled: includeCanceled,
+                                  includeActive: includeActive)
+        }
+    }
+    
+    public static func cancelStop(clientID: String, stopID: Int32) -> CommonApiRequest<CancelStopResult> {
+        .init {
+            try $0.stops.cancelStop(clientID: clientID,
+                                    stopID: stopID)
+        }
+    }
+    
+    public static func newStop(clientID: String, securityBoard: String, securityCode: String, buySell: BuySell, stopLoss: StopLoss?, takeProfit: TakeProfit?, expirationDate: Date?, linkOrder: Int64, validBefore: OrderValidBefore?) -> CommonApiRequest<NewStopResult> {
+        .init {
+            try $0.stops.newStop(clientID: clientID,
+                                 securityBoard: securityBoard,
+                                 securityCode: securityCode,
+                                 buySell: buySell,
+                                 stopLoss: stopLoss,
+                                 takeProfit: takeProfit,
+                                 expirationDate: expirationDate,
+                                 linkOrder: linkOrder,
+                                 validBefore: validBefore)
+        }
+    }
+    
+    
 }

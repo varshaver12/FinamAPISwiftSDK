@@ -30,7 +30,7 @@ public protocol Order {
 
   /// Time of Order placement in UTC.
   /// Время регистрации заявки на бирже. В UTC.
-    var createdAt: Date { get }
+    var createdAt: Date? { get }
 
   /// Lot price.
   /// Цена за лот.
@@ -54,15 +54,15 @@ public protocol Order {
 
   /// Conditional order properties.
   /// Параметры условной заявки.
-    var condition: OrderCondition { get }
+    var condition: OrderCondition? { get }
 
   /// Order lifetime.
   /// Время действия заявки.
-    var validBefore: OrderValidBefore { get }
+    var validBefore: OrderValidBefore? { get }
 
   /// Time of order registration on the server in UTC.
   /// Время, когда заявка была зарегистрирована на сервере. В UTC.
-    var acceptedAt: Date { get }
+    var acceptedAt: Date? { get }
 
   /// Security Board.
   /// Основной режим торгов инструмента.
@@ -81,15 +81,15 @@ internal struct OrderModel: Order {
     var clientID: String
     var status: OrderStatus
     var buySell: BuySell
-    var createdAt: Date
+    var createdAt: Date?
     var price: Double
     var quantity: Int32
     var balance: Int32
     var message: String
     var currency: String
-    var condition: OrderCondition
-    var validBefore: OrderValidBefore
-    var acceptedAt: Date
+    var condition: OrderCondition?
+    var validBefore: OrderValidBefore?
+    var acceptedAt: Date?
     var securityBoard: String
     var market: Market
 }
