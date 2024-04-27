@@ -160,3 +160,16 @@ internal extension Proto_Tradeapi_V1_NewStopRequest {
         
     }
 }
+
+// MARK: - SecuritiesServiceRequests
+
+internal extension Proto_Tradeapi_V1_GetPortfolioRequest {
+    init(clientID: String, content: PortfolioContent?) throws {
+        self.clientID = clientID
+        if let content = content { self.content = content.forRequest() }
+    }
+    
+    static func new(clientID: String, content: PortfolioContent?) throws -> Self {
+        try .init(clientID: clientID, content: content)
+    }
+}

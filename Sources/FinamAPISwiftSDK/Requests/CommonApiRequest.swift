@@ -92,5 +92,16 @@ public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result>
         }
     }
     
+    // MARK: - Сервис получения структуры портфеля.
+    
+    public static func getPortfolios(
+        clientID: String,
+        content: PortfolioContent?
+    ) -> CommonApiRequest<GetPortfolioResult> {
+        .init {
+            try $0.portfolios.getPortfolios(clientID: clientID, content: content)
+        }
+    }
+    
     
 }
