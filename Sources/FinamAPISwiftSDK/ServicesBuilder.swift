@@ -35,4 +35,12 @@ internal class ServicesBuilder {
         return GrpcStopsService(client)
     }
     
+    func makePortfoliosService() -> PortfoliosService  {
+        let client = PortfoliosServiceClient(
+            channel: self.channel,
+            defaultCallOptions: self.callOptions
+        )
+        return GrpcPortfoliosService(client)
+    }
+    
 }
