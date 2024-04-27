@@ -78,6 +78,14 @@ public final class CommonAsyncApiRequest<Result>: AsyncApiRequest<CommonApiClien
         }
     }
     
+    // MARK: - Сервис получения структуры портфеля.
+    
+    public static func getPortfolio(clientID: String, content: PortfolioContent?) -> CommonAsyncApiRequest<GetPortfolioResult> {
+        .init {
+            try await $0.portfolios.getPortfolios(clientID: clientID, content: content)
+        }
+    }
+    
     
 }
 #endif
