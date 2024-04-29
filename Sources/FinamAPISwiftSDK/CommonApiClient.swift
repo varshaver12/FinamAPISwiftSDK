@@ -14,6 +14,8 @@ public protocol CommonApiClient {
     /// Сервис получения структуры портфеля.
     var portfolios: PortfoliosService { get }
     
+    var eventsStream: EventsStreamService { get }
+    
     func sendRequest<Result>(_ request: CommonApiRequest<Result>) throws -> EventLoopFuture<Result>
     
 #if compiler(>=5.5) && canImport(_Concurrency)
@@ -36,6 +38,7 @@ internal final class CommonFinamApiClient: CommonApiClient {
     var securities: SecuritiesService
     var stops: StopsService
     var portfolios: PortfoliosService
+    var eventsStream: EventsStreamService
     
     private let connection: ApiConnection
 
@@ -47,6 +50,7 @@ internal final class CommonFinamApiClient: CommonApiClient {
         self.securities = builder.makeSecuritiesService()
         self.stops = builder.makeStopsService()
         self.portfolios = builder.makePortfoliosService()
+        self.eventsStream = builder.makeEventsStreamService()
     }
     
     deinit {
