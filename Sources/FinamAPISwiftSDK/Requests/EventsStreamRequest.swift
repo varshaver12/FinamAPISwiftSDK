@@ -20,11 +20,11 @@ public final class EventsStreamRequest {
 public extension EventsStreamRequest {
     
     private func addOrderBookSubscribeRequest(_ request: Proto_Tradeapi_V1_OrderBookSubscribeRequest) -> Void {
-        if let existingIndex = orderBookSubscribe.firstIndex(where: { e in
-            e.securityCode == request.securityCode
-        }) { } else {
-            orderBookSubscribe.append(request)
-        }
+        if let existingIndex = orderBookSubscribe.firstIndex(where: { $0.securityCode == request.securityCode }) {
+                orderBookSubscribe[existingIndex] = request
+            } else {
+                orderBookSubscribe.append(request)
+            }
     }
     
     static func orderBookSubscribe(requestID: String, securityCode: String, securityBoard: String) -> EventsStreamRequest {
@@ -60,9 +60,9 @@ internal extension Proto_Tradeapi_V1_OrderBookSubscribeRequest {
 public extension EventsStreamRequest {
     
     private func addOrderBookUnsubscribeRequest(_ request: Proto_Tradeapi_V1_OrderBookUnsubscribeRequest) -> Void {
-        if let existingIndex = orderBookUnsubscribe.firstIndex(where: { e in
-            e.securityCode == request.securityCode
-        }) { } else {
+        if let existingIndex = orderBookUnsubscribe.firstIndex(where: { $0.securityCode == request.securityCode }) {
+            orderBookUnsubscribe[existingIndex] = request
+        } else {
             orderBookUnsubscribe.append(request)
         }
     }
@@ -100,9 +100,9 @@ internal extension Proto_Tradeapi_V1_OrderBookUnsubscribeRequest {
 public extension EventsStreamRequest {
     
     private func addTradesSubscribeRequest(_ request: Proto_Tradeapi_V1_OrderTradeSubscribeRequest) -> Void {
-        if let existingIndex = tradesSubscribe.firstIndex(where: { e in
-            e.requestID == request.requestID
-        }) { } else {
+        if let existingIndex = tradesSubscribe.firstIndex(where: { $0.requestID == request.requestID }) {
+            tradesSubscribe[existingIndex] = request
+        } else {
             tradesSubscribe.append(request)
         }
     }
@@ -143,12 +143,13 @@ internal extension Proto_Tradeapi_V1_OrderTradeSubscribeRequest {
 public extension EventsStreamRequest {
     
     private func addTradesUnsubscribeRequest(_ request: Proto_Tradeapi_V1_OrderTradeUnsubscribeRequest) -> Void {
-        if let existingIndex = tradesUnsubscribe.firstIndex(where: { e in
-            e.requestID == request.requestID
-        }) { } else {
+        if let existingIndex = tradesUnsubscribe.firstIndex(where: { $0.requestID == request.requestID }) {
+            tradesUnsubscribe[existingIndex] = request
+        } else {
             tradesUnsubscribe.append(request)
         }
     }
+
     
     static func tradesUnsubscribe(requestID: String) -> EventsStreamRequest {
         let request = EventsStreamRequest()
@@ -177,9 +178,9 @@ internal extension Proto_Tradeapi_V1_OrderTradeUnsubscribeRequest {
 public extension EventsStreamRequest {
     
     private func addKeepAliveRequest(_ request: Proto_Tradeapi_V1_KeepAliveRequest) -> Void {
-        if let existingIndex = keepAliveRequest.firstIndex(where: { e in
-            e.requestID == request.requestID
-        }) { } else {
+        if let existingIndex = keepAliveRequest.firstIndex(where: { $0.requestID == request.requestID }) {
+            keepAliveRequest[existingIndex] = request
+        } else {
             keepAliveRequest.append(request)
         }
     }

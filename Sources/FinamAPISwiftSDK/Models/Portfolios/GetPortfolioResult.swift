@@ -48,9 +48,9 @@ internal extension GetPortfolioResultModel {
         self.content = grpcModel.content.toModel()
         self.equity = grpcModel.equity
         self.balance = grpcModel.balance
-        self.positions = try grpcModel.positions.map { try $0.toModel() }
+        self.positions = grpcModel.positions.map { $0.toModel() }
         self.currencies = grpcModel.currencies.map { $0.toModel() }
-        self.money = try grpcModel.money.map { try $0.toModel() }
+        self.money = grpcModel.money.map { $0.toModel() }
     }
 }
 

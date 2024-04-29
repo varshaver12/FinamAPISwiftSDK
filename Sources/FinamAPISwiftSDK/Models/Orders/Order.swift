@@ -108,8 +108,8 @@ internal extension OrderModel {
         self.balance = grpcModel.balance
         self.message = grpcModel.message
         self.currency = grpcModel.currency
-        self.condition = try grpcModel.condition.toModel()
-        self.validBefore = try grpcModel.validBefore.toModel()
+        self.condition = grpcModel.condition.toModel()
+        self.validBefore = grpcModel.validBefore.toModel()
         self.acceptedAt = grpcModel.acceptedAt.date
         self.securityBoard = grpcModel.securityBoard
         self.market = try .new(rawValue: grpcModel.market.rawValue)

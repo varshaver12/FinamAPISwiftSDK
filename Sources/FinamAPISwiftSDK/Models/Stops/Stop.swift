@@ -119,7 +119,7 @@ internal extension StopModel {
         self.buySell = try .new(rawValue: grpcModel.buySell.rawValue)
         self.expirationDate = grpcModel.expirationDate.date
         self.linkOrder = grpcModel.linkOrder
-        self.validBefore = try grpcModel.validBefore.toModel()
+        self.validBefore = grpcModel.validBefore.toModel()
         self.status = try .new(rawValue: grpcModel.status.rawValue)
         self.message = grpcModel.message
         self.orderNo = grpcModel.orderNo
