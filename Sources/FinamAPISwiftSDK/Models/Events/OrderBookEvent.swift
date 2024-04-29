@@ -34,7 +34,6 @@ internal extension OrderBookEventModel {
 
 internal extension Proto_Tradeapi_V1_OrderBookEvent {
     func toModel() -> OrderBookEventModel {
-        print("toModel() -> OrderBookEventModel")
         return OrderBookEventModel(grpcModel: self)
     }
 }
