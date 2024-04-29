@@ -50,7 +50,7 @@ public extension EventsStreamRequest {
 internal extension Proto_Tradeapi_V1_OrderBookSubscribeRequest {
     init(requestID: String, securityCode: String, securityBoard: String) {
         self.requestID = requestID
-        self.securityBoard = securityCode
+        self.securityBoard = securityBoard
         self.securityCode = securityCode
     }
 }
@@ -90,7 +90,7 @@ public extension EventsStreamRequest {
 internal extension Proto_Tradeapi_V1_OrderBookUnsubscribeRequest {
     init(requestID: String, securityCode: String, securityBoard: String) {
         self.requestID = requestID
-        self.securityBoard = securityCode
+        self.securityBoard = securityBoard
         self.securityCode = securityCode
     }
 }
