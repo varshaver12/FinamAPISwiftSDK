@@ -43,4 +43,12 @@ internal class ServicesBuilder {
         return GrpcPortfoliosService(client)
     }
     
+    func makeEventsStreamService() -> EventsStreamService  {
+        let client = EventsStreamServiceClient(
+            channel: self.channel,
+            defaultCallOptions: self.callOptions
+        )
+        return GrpcEventsStreamService(client)
+    }
+    
 }

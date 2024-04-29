@@ -75,15 +75,19 @@ internal struct OrderConditionModel: OrderCondition {
 }
 
 internal extension OrderConditionModel {
-    fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderCondition) throws {
-        self.type = try .new(rawValue: grpcModel.type.rawValue)
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderCondition) {
+        do {
+            self.type = try .new(rawValue: grpcModel.type.rawValue)
+        } catch {
+            self.type = .unspecified
+        }
         self.price = grpcModel.price
         self.time = grpcModel.time.date
     }
 }
 
 internal extension Proto_Tradeapi_V1_OrderCondition {
-    func toModel() throws -> OrderConditionModel {
-        try OrderConditionModel(grpcModel: self)
+    func toModel() -> OrderConditionModel {
+        OrderConditionModel(grpcModel: self)
     }
 }

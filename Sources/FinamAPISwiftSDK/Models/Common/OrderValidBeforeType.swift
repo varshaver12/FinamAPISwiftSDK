@@ -33,9 +33,13 @@ public struct OrderValidBefore: Codable {
 }
 
 internal extension OrderValidBefore {
-    fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderValidBefore) throws {
-        self.type = try .new(rawValue: grpcModel.type.rawValue)
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderValidBefore) {
         self.time = grpcModel.time.date
+        do {
+            self.type = try .new(rawValue: grpcModel.type.rawValue)
+        } catch {
+            self.type = .unspecified
+        }
     }
     
     func forRequest() throws -> Proto_Tradeapi_V1_OrderValidBefore {
@@ -47,7 +51,7 @@ internal extension OrderValidBefore {
 }
 
 internal extension Proto_Tradeapi_V1_OrderValidBefore {
-    func toModel() throws -> OrderValidBefore {
-        try OrderValidBefore(grpcModel: self)
+    func toModel() -> OrderValidBefore {
+        OrderValidBefore(grpcModel: self)
     }
 }
