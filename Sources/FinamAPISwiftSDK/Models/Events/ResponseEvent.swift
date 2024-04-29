@@ -20,7 +20,7 @@ internal struct ResponseEventModel: ResponseEvent {
 }
 
 internal extension ResponseEventModel {
-    fileprivate init(grpcModel: Proto_Tradeapi_V1_ResponseEvent) throws {
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_ResponseEvent) {
         self.requestID = grpcModel.requestID
         self.success = grpcModel.success
         self.errors = grpcModel.errors.map { $0.toModel() }
@@ -28,7 +28,7 @@ internal extension ResponseEventModel {
 }
 
 internal extension Proto_Tradeapi_V1_ResponseEvent {
-    func toModel() throws -> ResponseEventModel {
-        try ResponseEventModel(grpcModel: self)
+    func toModel() -> ResponseEventModel {
+        ResponseEventModel(grpcModel: self)
     }
 }

@@ -23,15 +23,19 @@ internal struct MoneyRowModel: MoneyRow {
 }
 
 internal extension MoneyRowModel {
-    fileprivate init(grpcModel: Proto_Tradeapi_V1_MoneyRow) throws {
-        self.market = try .new(rawValue: grpcModel.market.rawValue)
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_MoneyRow) {
+        do {
+            self.market = try .new(rawValue: grpcModel.market.rawValue)
+        } catch {
+            self.market = .unspecified
+        }
         self.currency = grpcModel.currency
         self.balance = grpcModel.balance
     }
 }
 
 internal extension Proto_Tradeapi_V1_MoneyRow {
-    func toModel() throws -> MoneyRowModel {
-        try MoneyRowModel(grpcModel: self)
+    func toModel() -> MoneyRowModel {
+        MoneyRowModel(grpcModel: self)
     }
 }

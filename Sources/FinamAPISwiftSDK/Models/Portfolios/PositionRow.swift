@@ -88,9 +88,8 @@ internal struct PositionRowModel: PositionRow {
 }
 
 internal extension PositionRowModel {
-    fileprivate init(grpcModel: Proto_Tradeapi_V1_PositionRow) throws {
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_PositionRow) {
         self.securityCode = grpcModel.securityCode
-        self.market = try .new(rawValue: grpcModel.market.rawValue)
         self.balance = grpcModel.balance
         self.currentPrice = grpcModel.currentPrice
         self.equity = grpcModel.equity
@@ -105,11 +104,16 @@ internal extension PositionRowModel {
         self.priceCurrency = grpcModel.priceCurrency
         self.averagePriceCurrency = grpcModel.averagePriceCurrency
         self.averageRate = grpcModel.averageRate
+        do {
+            self.market = try .new(rawValue: grpcModel.market.rawValue)
+        } catch {
+            self.market = .unspecified
+        }
     }
 }
 
 internal extension Proto_Tradeapi_V1_PositionRow {
-    func toModel() throws -> PositionRowModel {
-        try PositionRowModel(grpcModel: self)
+    func toModel() -> PositionRowModel {
+        PositionRowModel(grpcModel: self)
     }
 }

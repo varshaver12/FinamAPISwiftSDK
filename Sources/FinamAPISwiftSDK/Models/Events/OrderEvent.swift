@@ -70,27 +70,35 @@ internal struct OrderEventModel: OrderEvent {
 }
 
 internal extension OrderEventModel {
-    fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderEvent) throws {
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderEvent) {
         self.orderNo = grpcModel.orderNo
         self.transactionID = grpcModel.transactionID
         self.securityCode = grpcModel.securityCode
         self.clientID = grpcModel.clientID
-        self.status = try .new(rawValue: grpcModel.status.rawValue)
-        self.buySell = try .new(rawValue: grpcModel.buySell.rawValue)
         self.createdAt = grpcModel.createdAt.date
         self.price = grpcModel.price
         self.quantity = grpcModel.quantity
         self.balance = grpcModel.balance
         self.message = grpcModel.message
         self.currency = grpcModel.currency
-        self.condition = try grpcModel.condition.toModel()
-        self.validBefore = try grpcModel.validBefore.toModel()
+        self.condition = grpcModel.condition.toModel()
+        self.validBefore = grpcModel.validBefore.toModel()
         self.acceptedAt = grpcModel.acceptedAt.date
+        do {
+            self.status = try .new(rawValue: grpcModel.status.rawValue)
+        } catch {
+            self.status = .unspecified
+        }
+        do {
+            self.buySell = try .new(rawValue: grpcModel.buySell.rawValue)
+        } catch {
+            self.buySell = .unspecified
+        }
     }
 }
 
 internal extension Proto_Tradeapi_V1_OrderEvent {
-    func toModel() throws -> OrderEventModel {
-        try OrderEventModel(grpcModel: self)
+    func toModel() -> OrderEventModel {
+        OrderEventModel(grpcModel: self)
     }
 }

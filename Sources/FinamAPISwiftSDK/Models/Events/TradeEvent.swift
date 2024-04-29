@@ -57,7 +57,7 @@ internal struct TradeEventModel: TradeEvent {
 }
 
 internal extension TradeEventModel {
-    fileprivate init(grpcModel: Proto_Tradeapi_V1_TradeEvent) throws {
+    fileprivate init(grpcModel: Proto_Tradeapi_V1_TradeEvent) {
         self.securityCode = grpcModel.securityCode
         self.tradeNo = grpcModel.tradeNo
         self.orderNo = grpcModel.orderNo
@@ -66,7 +66,11 @@ internal extension TradeEventModel {
         self.quantity = grpcModel.quantity
         self.price = grpcModel.price
         self.value = grpcModel.value
-        self.buySell = try .new(rawValue: grpcModel.buySell.rawValue)
+        do {
+            self.buySell = try .new(rawValue: grpcModel.buySell.rawValue)
+        } catch {
+            self.buySell = .unspecified
+        }
         self.commission = grpcModel.commission
         self.currency = grpcModel.currency
         self.accruedInterest = grpcModel.accruedInterest
@@ -74,7 +78,7 @@ internal extension TradeEventModel {
 }
 
 internal extension Proto_Tradeapi_V1_TradeEvent {
-    func toModel() throws -> TradeEventModel {
-        try TradeEventModel(grpcModel: self)
+    func toModel() -> TradeEventModel {
+        TradeEventModel(grpcModel: self)
     }
 }
