@@ -45,36 +45,23 @@ public enum OrderConditionType: Int, Codable {
 
 }
 
-public protocol OrderCondition {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
+public struct OrderCondition {
 
   /// Condition type.
   /// Тип условия.
-    var type: OrderConditionType { get }
+    var type: OrderConditionType
 
   /// Conditional value.
   /// Значение для условия.
-    var price: Double { get }
+    var price: Double
 
   /// Placement time.
   /// Время выставления.
-    var time: Date? { get }
+    var time: Date?
  
 }
 
-internal struct OrderConditionModel: OrderCondition {
-    var type: OrderConditionType
-    
-    var price: Double
-    
-    var time: Date?
-    
-    
-}
-
-internal extension OrderConditionModel {
+internal extension OrderCondition {
     fileprivate init(grpcModel: Proto_Tradeapi_V1_OrderCondition) {
         do {
             self.type = try .new(rawValue: grpcModel.type.rawValue)
@@ -87,7 +74,7 @@ internal extension OrderConditionModel {
 }
 
 internal extension Proto_Tradeapi_V1_OrderCondition {
-    func toModel() -> OrderConditionModel {
-        OrderConditionModel(grpcModel: self)
+    func toModel() -> OrderCondition {
+        OrderCondition(grpcModel: self)
     }
 }

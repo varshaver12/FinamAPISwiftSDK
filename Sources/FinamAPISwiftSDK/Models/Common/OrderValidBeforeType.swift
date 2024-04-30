@@ -22,7 +22,7 @@ public enum OrderValidBeforeType: Int, Codable {
 
 }
 
-public struct OrderValidBefore: Codable {
+public struct OrderValidBefore {
     var type: OrderValidBeforeType
     var time: Date?
     
