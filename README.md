@@ -188,4 +188,4 @@ func unsubscribePrice(ticker: String) {
 
 # Связь с создателем
 
-* [Telegram-автора](https://t.me/vrshv)
+* [Telegram-автора](https://t.me/vrshvr)
