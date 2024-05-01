@@ -1,9 +1,6 @@
 /// What kind of data the response contains.
 /// Какие данные будут в ответе.
 public struct PortfolioContent {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
 
   /// Currency positions.
   /// Валютные позиции.

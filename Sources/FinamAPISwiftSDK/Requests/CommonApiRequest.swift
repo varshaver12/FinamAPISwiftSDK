@@ -1,6 +1,6 @@
 import Foundation
 
-public final class CommonApiRequest<Result>: ApiRequest<CommonApiClient, Result> {
+public final class CommonApiRequest<Result>: ApiRequest<ApiClient, Result> {
     
     // MARK: - Сервис работы с торговыми поручениями.
     

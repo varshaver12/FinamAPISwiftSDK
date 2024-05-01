@@ -1,4 +1,4 @@
-public final class CommonStreamWrapper<Stream>: StreamWrapper<CommonApiClient, Stream> {
+public final class CommonStreamWrapper<Stream>: StreamWrapper<ApiClient, Stream> {
     
     public static var events: CommonStreamWrapper<EventsStream> {
         .init {

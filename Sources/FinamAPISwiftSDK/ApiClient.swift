@@ -1,6 +1,6 @@
 import NIOCore
 
-public protocol CommonApiClient {
+public protocol ApiClient {
 
     /// Сервис работы с торговыми поручениями.
     var orders: OrdersService { get }
@@ -21,18 +21,18 @@ public protocol CommonApiClient {
 #if compiler(>=5.5) && canImport(_Concurrency)
 
     @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
-    func sendRequest<Result>(_ request: CommonAsyncApiRequest<Result>) async throws -> Result
+    func sendRequest<Result>(_ request: AsyncRequest<Result>) async throws -> Result
 
 #endif
 }
 
-public extension CommonApiClient {
+public extension ApiClient {
     func sendRequest<Result>(_ request: CommonApiRequest<Result>) throws -> EventLoopFuture<Result> {
         return try request.send(client: self)
     }
 }
 
-internal final class CommonFinamApiClient: CommonApiClient {
+internal final class CommonFinamApiClient: ApiClient {
     
     var orders: OrdersService
     var securities: SecuritiesService
