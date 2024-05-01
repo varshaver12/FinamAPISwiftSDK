@@ -19,7 +19,7 @@ public final class FinamApiClient {
         appName: String = Constants.appName,
         host: String = Constants.host,
         port: Int = Constants.port
-    ) throws -> CommonApiClient {
+    ) throws -> ApiClient {
         guard !token.isEmpty, !host.isEmpty, port != 0 else {
             throw FinamApiError.invalidInitializationData
         }
